@@ -1,4 +1,4 @@
-package responsabilidade;
+package responsabilidade_sem;
 
 public class PessoaFisicaMisturada {
 	private int id;
@@ -7,7 +7,7 @@ public class PessoaFisicaMisturada {
 	private String cpf;
 	private String email;
 	private String endereco; 
-	private static PessoaFisicaMisturada[] pessoas = new PessoaFisica[100];
+	private static PessoaFisicaMisturada[] pessoas = new PessoaFisicaMisturada[100];
 	private static int totalPessoas = 0;	 
  
 	public PessoaFisicaMisturada(int id, String nome, int idade, String cpf, String email, String endereco) {

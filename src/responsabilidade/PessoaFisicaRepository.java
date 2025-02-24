@@ -1,16 +1,16 @@
 package responsabilidade;
 
 //Classe de repositório - responsável pelo armazenamento
-public class PessoaRepository {
+public class PessoaFisicaRepository {
 	private Pessoa[] pessoas;
 	private int totalPessoas;
 
-	public PessoaRepository() {
-		this.pessoas = new Pessoa[100];
+	public PessoaFisicaRepository() {
+		this.pessoas = new PessoaFisica[100];
 		this.totalPessoas = 0;
 	}
 
-	public void salvar(Pessoa pessoa) {
+	public void salvar(PessoaFisica pessoa) {
 		pessoas[totalPessoas] = pessoa;
 		totalPessoas++;
 	}
@@ -24,7 +24,7 @@ public class PessoaRepository {
 		return null;
 	}
 
-	public void atualizar(Pessoa pessoa) {
+	public void atualizar(PessoaFisica pessoa) {
 		for (int i = 0; i < totalPessoas; i++) {
 			if (pessoas[i].getId() == pessoa.getId()) {
 				pessoas[i] = pessoa;

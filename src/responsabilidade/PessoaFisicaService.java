@@ -1,10 +1,10 @@
 package responsabilidade;
 
 //Classe de serviço - contém regras de negócio
-public class PessoaService {
-	private PessoaRepository repository;
+public class PessoaFisicaService {
+	private PessoaFisicaRepository repository;
 
-	public PessoaService(PessoaRepository repository) {
+	public PessoaFisicaService(PessoaFisicaRepository repository) {
 		this.repository = repository;
 	}
 
@@ -12,12 +12,12 @@ public class PessoaService {
 		return pessoa.getIdade() >= 18;
 	}
 
-	public void fazerAniversario(Pessoa pessoa) {
+	public void fazerAniversario(PessoaFisica pessoa) {
 		pessoa.setIdade(pessoa.getIdade() + 1);
 		repository.atualizar(pessoa);
 	}
 
-	public void cadastrarPessoa(Pessoa pessoa) {
+	public void cadastrarPessoa(PessoaFisica pessoa) {
 		pessoa.setId(repository.getProximoId());
 		repository.salvar(pessoa);
 	}

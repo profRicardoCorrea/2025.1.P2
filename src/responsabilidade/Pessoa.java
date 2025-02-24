@@ -1,7 +1,7 @@
 package responsabilidade;
 
 //Classe de entidade - apenas dados e comportamentos básicos
-public class Pessoa implements IPessoa {
+public abstract class Pessoa implements IPessoa {
 	private int id;
 	private String nome;
 	private int idade;
