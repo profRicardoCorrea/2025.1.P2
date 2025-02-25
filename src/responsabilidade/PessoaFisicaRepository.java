@@ -1,8 +1,11 @@
 package responsabilidade;
 
+import java.util.ArrayList;
+
 //Classe de repositório - responsável pelo armazenamento
 public class PessoaFisicaRepository {
 	private Pessoa[] pessoas;
+	private ArrayList<PessoaFisica> pessoasL=new ArrayList();
 	private int totalPessoas;
 
 	public PessoaFisicaRepository() {
@@ -11,8 +14,12 @@ public class PessoaFisicaRepository {
 	}
 
 	public void salvar(PessoaFisica pessoa) {
+		//Array
 		pessoas[totalPessoas] = pessoa;
 		totalPessoas++;
+		//ArrayList
+		pessoasL.add(pessoa);
+		
 	}
 
 	public Pessoa buscarPorId(int id) {
