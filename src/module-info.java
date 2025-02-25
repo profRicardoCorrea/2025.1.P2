@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author ricar
- *
- */
-module antiracista {
-}
