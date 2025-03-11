@@ -20,5 +20,14 @@ public class SistemaFutebol {
 
         campeonatoServico.registrarPartida(time1, 2, time2, 1);
         campeonatoServico.listarClassificacao(campeonato);
+
+        // Exemplo de uso do ArrayGenerico com Times
+        ArrayGenerico<Time> times = new ArrayGenerico<>();
+        times.adicionar(time1);
+        times.adicionar(time2);
+        
+        // Acessando os times
+        System.out.println("Time no índice 0: " + times.obter(0).getNome());
+        System.out.println("Time no índice 1: " + times.obter(1).getNome());
     }
 }
