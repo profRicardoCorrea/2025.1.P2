@@ -11,4 +11,5 @@ public interface IJogoDigitalService {
     List<JogoDigital> listarJogos();
     List<JogoDigital> buscarPorPlataforma(String plataforma);
     JogoDigital buscarPorId(Long id);
+	void sincronizarRepositorios();
 } 

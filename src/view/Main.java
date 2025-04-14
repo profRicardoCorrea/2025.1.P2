@@ -5,16 +5,28 @@ import java.util.Scanner;
 import entities.JogoDigital;
 import repositories.IJogoDigitalRepository;
 import repositories.impl.JogoDigitalRepository;
+import repositories.impl.JogoDigitalRepositoryJDBC;
 import services.IJogoDigitalService;
 import services.impl.JogoDigitalService;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final IJogoDigitalRepository jogoDigitalRepository = new JogoDigitalRepository();
-    private static final IJogoDigitalService jogoDigitalService = new JogoDigitalService(jogoDigitalRepository);
+    private static final IJogoDigitalRepository repositoryMemoria = new JogoDigitalRepository();
+    private static final IJogoDigitalRepository repositoryJDBC = new JogoDigitalRepositoryJDBC();
+    private static final IJogoDigitalService jogoDigitalService = new JogoDigitalService(repositoryMemoria, repositoryJDBC);
     
     public static void main(String[] args) {
-        int opcao;
+    	
+    	JogoDigitalRepositoryJDBC jdr=new JogoDigitalRepositoryJDBC();
+		JogoDigital jd1=new JogoDigital();
+		jd1.setNome("Teste");
+		jd1.setDesenvolvedora("Teste Games");
+		jd1.setPlataforma("Windows");
+		jd1.setPreco(200);		
+		jdr.salvar(jd1);
+		
+		
+       /* int opcao;
         do {
             exibirMenu();
             opcao = scanner.nextInt();
@@ -36,6 +48,9 @@ public class Main {
                 case 5:
                     buscarJogosPorPlataforma();
                     break;
+                case 6:
+                    sincronizarRepositorios();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -43,6 +58,8 @@ public class Main {
                     System.out.println("Opcao invalida!");
             }
         } while (opcao != 0);
+        
+        scanner.close();*/
     }
     
     private static void exibirMenu() {
@@ -52,6 +69,7 @@ public class Main {
         System.out.println("3 - Remover Jogo Digital");
         System.out.println("4 - Atualizar Jogo Digital");
         System.out.println("5 - Buscar Jogos por Plataforma");
+        System.out.println("6 - Sincronizar Repositórios");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opcao: ");
     }
@@ -195,22 +213,36 @@ public class Main {
         }
     }
     
+    private static void sincronizarRepositorios() {
+        System.out.println("\n=== SINCRONIZAR REPOSITÓRIOS ===");
+        try {
+            jogoDigitalService.sincronizarRepositorios();
+            System.out.println("Repositórios sincronizados com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao sincronizar repositórios: " + e.getMessage());
+        }
+    }
+    
     private static void buscarJogosPorPlataforma() {
         System.out.println("\n=== BUSCAR JOGOS POR PLATAFORMA ===");
         
-        System.out.print("Digite a plataforma: ");
-        String plataforma = scanner.nextLine();
-        
-        List<JogoDigital> jogos = jogoDigitalService.buscarPorPlataforma(plataforma);
-        
-        if (jogos.isEmpty()) {
-            System.out.println("Nenhum jogo encontrado para a plataforma: " + plataforma);
-            return;
-        }
-        
-        System.out.println("\nJogos encontrados:");
-        for (JogoDigital jogo : jogos) {
-            System.out.println(jogo);
+        try {
+            System.out.print("Digite a plataforma: ");
+            String plataforma = scanner.nextLine();
+            
+            List<JogoDigital> jogos = jogoDigitalService.buscarPorPlataforma(plataforma);
+            
+            if (jogos.isEmpty()) {
+                System.out.println("Nenhum jogo encontrado para a plataforma: " + plataforma);
+                return;
+            }
+            
+            System.out.println("\nJogos encontrados:");
+            for (JogoDigital jogo : jogos) {
+                System.out.println(jogo);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar jogos: " + e.getMessage());
         }
     }
 } 
